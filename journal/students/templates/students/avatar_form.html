@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение аватара</title>
+</head>
+<body>
+    <h1>Изменение аватара</h1>
+
+    <p>
+        Студент: <strong>{{ student.surname }} {{ student.name }} {{ student.patronymic }}</strong>
+    </p>
+
+    {% if student.avatar %}
+        <p>Текущий аватар:</p>
+        <img src="{{ student.avatar.url }}" alt="Аватар" width="200">
+    {% else %}
+        <p><em>Аватар не задан.</em></p>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {# Ошибки формы рядом с полем #}
+        {% if form.avatar.errors %}
+            <ul style="color: red;">
+                {% for error in form.avatar.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <p>
+            <label for="{{ form.avatar.id_for_label }}">Новый аватар:</label>
+            {{ form.avatar }}
+        </p>
+
+        <button type="submit">Сохранить</button>
+        <a href="{% url 'students:list' %}">Отмена</a>
+    </form>
+</body>
+</html>

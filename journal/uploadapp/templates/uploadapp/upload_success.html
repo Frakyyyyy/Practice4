@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Файл загружен</title>
+</head>
+<body>
+    <h1>Файл успешно загружен</h1>
+    <ul>
+        <li>Оригинальное имя: {{ original_name }}</li>
+        <li>Серверное имя: {{ saved_name }}</li>
+    </ul>
+    <a href="{% url 'uploadapp:upload' %}">Загрузить ещё</a>
+</body>
+</html>
